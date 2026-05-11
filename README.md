@@ -63,17 +63,17 @@ Sysmon Event ID 11 confirmed the file creation at `C:\Users\Administrator\AppDat
 **Key indicator**: Executable written to `AppData\Roaming\` by PowerShell, followed immediately by a DNS query to a Microsoft-lookalike domain — high-confidence C2 deployment signature.
 
 #### 📸 Screenshot 1 — Sysmon Event ID 15: `URGENT!.zip` Downloaded via Chrome
-<img width="1366" height="728" alt="URGENT zip download" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/1_sysmon_urgent_zip_download.png" />
+<img width="1366" height="726" alt="image" src="https://github.com/user-attachments/assets/2429d55e-05e5-4649-a02b-1e2e9f2074e5" />
 
 *Sysmon Event ID 15 — Image: chrome.exe, TargetFilename: C:\Users\Administrator\Downloads\URGENT!.zip — phishing archive delivery confirmed*
 
 #### 📸 Screenshot 2 — Sysmon Event ID 11: C2 Malware Hidden at `AppData\Roaming\update.exe`
-<img width="1366" height="728" alt="C2 malware hidden" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/2_sysmon_c2_malware_appdata.png" />
+<img width="1366" height="731" alt="image" src="https://github.com/user-attachments/assets/06561659-13d3-47c5-989b-595602fba6d4" />
 
 *Sysmon Event ID 11 — Image: powershell.exe, TargetFilename: C:\Users\Administrator\AppData\Roaming\update.exe — C2 binary hidden in AppData*
 
 #### 📸 Screenshot 3 — Sysmon Event ID 22: C2 Callback to `route.m365officesync.workers.dev`
-<img width="1366" height="728" alt="C2 DNS callback" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/3_sysmon_c2_dns_callback.png" />
+<img width="1366" height="726" alt="image" src="https://github.com/user-attachments/assets/39415553-165b-4801-b611-c381738bccb0" />
 
 *Sysmon Event ID 22 — QueryName: route.m365officesync.workers.dev — Microsoft-lookalike C2 domain confirmed*
 
@@ -93,12 +93,12 @@ Event ID 4720 logged the creation of `support` at 7/2/2025 9:01:38 PM. The accou
 **Key indicator**: Account creation (4720) immediately following a successful login that was preceded by multiple 4625 failures from the same source — confirms attacker-created backdoor account.
 
 #### 📸 Screenshot 4 — Security Event ID 4625: 6 Failed Login Attempts to Administrator
-<img width="1366" height="728" alt="RDP brute force 4625" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/4_security_brute_force_4625.png" />
+<img width="1366" height="728" alt="image" src="https://github.com/user-attachments/assets/ad166ae2-58c8-49af-b966-9ff6c0d44f51" />
 
 *Security Event ID 4625 — 6 failed logon attempts to Administrator — targeted brute-force confirmed before successful login*
 
 #### 📸 Screenshot 5 — Security Event ID 4720: Backdoor Account `support` Created
-<img width="1366" height="728" alt="Backdoor account support" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/5_security_backdoor_account_support.png" />
+<img width="1366" height="726" alt="image" src="https://github.com/user-attachments/assets/82975cd8-aeaf-4de6-99a6-f6b19733226f" />
 
 *Security Event ID 4720 — New Account: support — backdoor account created immediately post-compromise at 9:01:38 PM*
 
@@ -119,7 +119,7 @@ The service was configured with `LocalSystem` account privileges — the highest
 **Key indicator**: New service (Event ID 4697) with binary path in an unusual directory (`\Windows\Help\`), running as LocalSystem — any new service outside `Program Files` or `Windows\System32` warrants immediate investigation.
 
 #### 📸 Screenshot 6 — Security Event ID 4697: `Data Protection Service` Persisting `nessie.exe`
-<img width="1366" height="728" alt="Service persistence nessie" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/6_security_service_persistence_nessie.png" />
+<img width="1366" height="729" alt="image" src="https://github.com/user-attachments/assets/6adac7ab-86fd-4d51-aeb3-cf4551a11511" />
 
 *Security Event ID 4697 — Service Name: Data Protection Service, Service File Name: C:\Windows\Help\nessie.exe, Account: LocalSystem — service persistence confirmed*
 
@@ -140,12 +140,12 @@ Running `troy.exe` directly revealed the flag `THM{c2_is_on_schedule!}` and expo
 **Key indicator**: Scheduled task (Event ID 4698) with binary in `Common Files` or unusual paths, triggered at startup — especially tasks named to resemble vendor software (`AmazonSync`, `MicrosoftUpdate`, `GoogleSync`).
 
 #### 📸 Screenshot 7 — Task Scheduler: `AmazonSync` Persisting `troy.exe` at Startup
-<img width="1366" height="728" alt="Scheduled task AmazonSync" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/7_task_scheduler_amazonsync_troy.png" />
+<img width="1366" height="729" alt="image" src="https://github.com/user-attachments/assets/901ea56a-236f-4089-8b67-552761df6cdd" />
 
 *Task Scheduler — AmazonSync task, Action: C:\Program Files\Common Files\troy.exe -d, Trigger: At system startup — scheduled task persistence confirmed*
 
 #### 📸 Screenshot 8 — `troy.exe` Executed: Flag `THM{c2_is_on_schedule!}` Recovered
-<img width="1366" height="728" alt="Troy malware flag" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/8_troy_malware_flag.png" />
+<img width="1366" height="726" alt="image" src="https://github.com/user-attachments/assets/eab57bbc-9607-4d74-a3ac-b6d90d0139ab" />
 
 *troy.exe output — parent: svchost.exe -k netsvcs -p -s Schedule — confirms scheduled task execution — flag: THM{c2_is_on_schedule!}*
 
@@ -177,12 +177,12 @@ Running `kitten.exe` revealed the flag `THM{persisting_in_basket!}` and confirme
 **Key indicator**: New entries in `HKCU\...\CurrentVersion\Run` pointing to executables in `\Public\`, `\Temp\`, or `\AppData\` — Sysmon Event ID 13 captures these registry writes in real time.
 
 #### 📸 Screenshot 9 — Startup Folder: `odin.cmd` Found + Source Code Revealed
-<img width="1366" height="728" alt="Startup folder odin.cmd" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/9_startup_folder_odin_cmd.png" />
+<img width="1366" height="726" alt="image" src="https://github.com/user-attachments/assets/871ae213-ceee-4e73-bc5b-7936785f700e" />
 
 *Startup folder — odin.cmd present with PowerShell payload — last output line: "Done doing bad stuff!" confirmed*
 
 #### 📸 Screenshot 10 — Registry Run Key: `kitten.exe` as `Basket` — Flag Recovered
-<img width="1366" height="728" alt="Run key kitten Basket" src="https://github.com/ugbomakyrian5-web/windows-threat-detection-3/blob/main/screenshots/10_registry_run_key_kitten_basket.png" />
+<img width="1366" height="704" alt="image" src="https://github.com/user-attachments/assets/dab00b8a-8051-400e-924a-ce258980f127" />
 
 *Registry Editor — HKCU\...\CurrentVersion\Run, Value: Basket = C:\Users\Public\kitten.exe — Run key persistence confirmed — flag: THM{persisting_in_basket!}*
 
